@@ -1,14 +1,14 @@
 {
   "name": "file-check-used",
-  "version": "1.0.1",
-  "description": "A cli-demo",
-  "main": "index.js",
+  "version": "1.0.1-stable",
+  "description": "一个检测项目中未使用资源素材的工具，去除未使用素材，降低项目打包的大小",
+  "main": "./index.js",
   "type": "module",
   "bin": {
-    "fcu": "./dist/index.js"
+    "fcu": "./index.js"
   },
   "scripts": {},
-  "author": "xmanlin",
+  "author": "weipengzou",
   "license": "MIT",
   "dependencies": {
     "commander": "^8.3.0",

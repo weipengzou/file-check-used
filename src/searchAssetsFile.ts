@@ -11,8 +11,8 @@ export const getTargetFileArr = (targetFilePath: any) => {
     // 遍历文件目录
     fs.readdirSync(filePath).forEach((fileName) => {
       if (/node_modules|dist/.test(filePath)) return;
-
-      const file = path.join(filePath, fileName);
+      let file = path.join(filePath, fileName);
+      file = file.replace(/\\/g, '/'); // 斜杠转换
       const info = fs.statSync(file);
       // 递归目录
       if (info.isDirectory()) readDir(file);
@@ -27,5 +27,6 @@ export const getTargetFileArr = (targetFilePath: any) => {
   };
   readDir(targetFilePath);
   console.log('文件总数：', resultArr.length);
+
   return resultArr;
 };
