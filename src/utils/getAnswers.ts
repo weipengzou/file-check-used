@@ -1,4 +1,4 @@
-import { prompt } from "inquirer";
+import inquirer from "inquirer";
 import { statSync } from "fs";
 
 type GetAnswersResponse = {
@@ -7,7 +7,7 @@ type GetAnswersResponse = {
 };
 
 export const getAnswers = async (): Promise<GetAnswersResponse> => {
-  return await prompt([
+  return await inquirer.prompt([
     {
       type: "input",
       name: "targetFileUrl",
