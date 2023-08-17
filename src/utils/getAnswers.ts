@@ -1,5 +1,5 @@
-import inquirer from "inquirer";
-import fs from "fs";
+import { prompt } from "inquirer";
+import { statSync } from "fs";
 
 type GetAnswersResponse = {
   targetFileUrl: string;
@@ -7,7 +7,7 @@ type GetAnswersResponse = {
 };
 
 export const getAnswers = async (): Promise<GetAnswersResponse> => {
-  return await inquirer.prompt([
+  return await prompt([
     {
       type: "input",
       name: "targetFileUrl",
@@ -33,4 +33,4 @@ export const getAnswers = async (): Promise<GetAnswersResponse> => {
   ]);
 };
 
-export const isDirectory = (path: string) => fs.statSync(path).isDirectory();
+export const isDirectory = (path: string) => statSync(path).isDirectory();

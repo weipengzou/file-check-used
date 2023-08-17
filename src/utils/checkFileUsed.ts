@@ -1,26 +1,28 @@
 import inquirer from "inquirer";
-import fs from "fs";
-import path from "path";
+import { readFileSync, readdirSync } from "fs";
+import { resolve, join, extname } from "path";
 import { isDirectory } from "./getAnswers.js";
 import { getTargetFileArr } from "./searchAssetsFile.js";
+import { targetExtName } from "../constants.js";
 
-const __dirname = path.resolve();
+const __dirname = resolve();
 const ui = new inquirer.ui.BottomBar();
 
 export const checkFileUsed = (targetFileUrl: string) => {
   const reasonFileArr = getTargetFileArr(targetFileUrl); // 目标文件下所有的文件数据
-
   ui.log.write("🚅 开始查询");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
     // 遍历文件目录
-    fs.readdirSync(filePath).forEach((fileName) => {
+    readdirSync(filePath).forEach((fileName) => {
       if (/node_modules|dist|\.git/.test(filePath)) return;
-      const file = path.join(filePath, fileName);
+      const file = join(filePath, fileName);
       // 递归目录
       if (isDirectory(file)) return readFile(file);
+      // 检测拓展名
+      if (!targetExtName.includes(extname(fileName))) return;
       // 获取遍历文件的内容
-      const curFileData = fs.readFileSync(file, "utf-8").toString();
+      const curFileData = readFileSync(file, "utf-8").toString();
       const waitDelArr: any[] = [];
       reasonFileArr.forEach((item) => {
         const isUsed = new RegExp(item.fileName).test(curFileData); // 是否在使用
