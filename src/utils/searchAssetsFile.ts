@@ -9,7 +9,7 @@ type GetTargetFileArr = (targetFilePath: string) => {
 }[];
 /** 获取目标文件信息 */
 export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
-  console.log(`📌 检查扩展名：`, checkExtName.join());
+  console.log(`📌 检查扩展名：`, checkExtName.join(" "));
   let resultArr: ReturnType<typeof getTargetFileArr> = [];
   // 遍历文件夹
   // 遍历文件目录
