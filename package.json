@@ -1,6 +1,6 @@
 {
   "name": "file-check-used",
-  "version": "1.0.5-stable",
+  "version": "1.0.7",
   "description": "一个检测项目中未使用资源素材的工具，去除未使用素材，降低项目打包的大小",
   "main": "./dist/index.js",
   "files": [
