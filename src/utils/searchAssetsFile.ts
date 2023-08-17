@@ -1,6 +1,6 @@
 import { extname, join } from "path";
 import { readdirSync, statSync } from "fs";
-import { checkExtName } from "../constants.js";
+import { checkExtName, targetExtName } from "../constants.js";
 
 type GetTargetFileArr = (targetFilePath: string) => {
   fileName: string; // 文件名
@@ -10,16 +10,16 @@ type GetTargetFileArr = (targetFilePath: string) => {
 /** 获取目标文件信息 */
 export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
   console.log(`📌 检查扩展名：`, checkExtName.join(" "));
+  console.log(`📌 目标扩展名：`, targetExtName.join(" "));
   let resultArr: ReturnType<typeof getTargetFileArr> = [];
-  // 遍历文件夹
   // 遍历文件目录
   const readDir = (path: string) => {
     readdirSync(path).forEach((fileName) => {
       if (/node_modules|dist|\.git/.test(path)) return;
       let filePath = join(path, fileName).replace(/\\/g, "/"); // 斜杠转换
-      const info = statSync(filePath);
+      const fileInfo = statSync(filePath);
       // 递归目录
-      if (info.isDirectory()) return readDir(filePath);
+      if (fileInfo.isDirectory()) return readDir(filePath);
       // 检测拓展名
       if (!checkExtName.includes(extname(fileName))) return;
       // paths 别名转换
@@ -34,7 +34,7 @@ export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
       resultArr.push({
         filePath,
         fileName,
-        fileSize: info.size,
+        fileSize: fileInfo.size,
       });
     });
   };
