@@ -3,11 +3,10 @@ import fs from "fs";
 import chalk from "chalk";
 import { getAnswers, checkFileUsed } from "./utils/index.js";
 
-const answers = await getAnswers();
-
-if (!fs.existsSync(answers.targetFileUrl)) throw new Error(`❗ 错误：本地目录 ${answers.targetFileUrl} 不存在！`);
-
-const bootstrap = () => {
+// 启动
+const bootstrap = async () => {
+  const answers = await getAnswers();
+  if (!fs.existsSync(answers.targetFileUrl)) throw new Error(`❗ 错误：本地目录 ${answers.targetFileUrl} 不存在！`);
   console.time("⏱️共耗时");
   const resultArr = checkFileUsed(answers.targetFileUrl);
   let totalSize: number = 0;
