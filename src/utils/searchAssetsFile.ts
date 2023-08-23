@@ -9,8 +9,8 @@ type GetTargetFileArr = (targetFilePath: string) => {
 }[];
 /** 获取目标文件信息 */
 export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
-  console.log(`📌 检查扩展名：`, checkExtName.join(" "));
-  console.log(`📌 目标扩展名：`, targetExtName.join(" "));
+  console.log(`📌 Check: `, checkExtName.join(" "));
+  console.log(`📌 Target: `, targetExtName.join(" "));
   let resultArr: ReturnType<typeof getTargetFileArr> = [];
   // 遍历文件目录
   const readDir = (path: string) => {
@@ -39,6 +39,6 @@ export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
     });
   };
   readDir(targetFilePath);
-  console.log("📁 文件总数：", resultArr.length);
+  console.log("📁 File Count: ", resultArr.length);
   return resultArr;
 };

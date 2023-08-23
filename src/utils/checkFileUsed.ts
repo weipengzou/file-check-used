@@ -10,7 +10,7 @@ const ui = new inquirer.ui.BottomBar();
 
 export const checkFileUsed = (targetFileUrl: string) => {
   const reasonFileArr = getTargetFileArr(targetFileUrl); // 目标文件下所有的文件数据
-  ui.log.write("🚅 开始查询");
+  ui.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
     // 遍历文件目录
