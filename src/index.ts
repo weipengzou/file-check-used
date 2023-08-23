@@ -6,9 +6,8 @@ import { getAnswers, checkFileUsed } from "./utils/index.js";
 const answers = await getAnswers();
 const { greenBright: greenText, yellowBright: yellowText } = chalk;
 
-if (!fs.existsSync(answers.targetFileUrl)) throw new Error(`❗ Error: ${answers.targetFileUrl} not found`);
-
 const bootstrap = () => {
+  if (!fs.existsSync(answers.targetFileUrl)) throw new Error(`${answers.targetFileUrl} not found`);
   console.time("⏱️  ");
   const resArr = checkFileUsed(answers.targetFileUrl);
   let totalSize: number = 0; // 总计大小
@@ -21,7 +20,7 @@ const bootstrap = () => {
     const path = chalk.bold(filePath.replace(fileName, greenText(fileName)));
     totalSize += fileSize;
     const sizeKB = (fileSize / 1024).toFixed(1); // KB
-    const size = Number(sizeKB) > largeSizeVal ? yellowText(sizeKB) : greenText(sizeKB);
+    const size = Number(sizeKB) > largeSizeVal ? yellowText(sizeKB) : sizeKB;
     console.log(`📁 ${path} ${size}KB`);
   });
   resArr.length > 0 && console.log(line);
@@ -34,5 +33,5 @@ const bootstrap = () => {
 try {
   bootstrap();
 } catch (error) {
-  console.log(`❗ Error: `, error);
+  console.log(`❗`, error);
 }

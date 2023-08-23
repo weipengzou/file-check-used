@@ -1,7 +1,6 @@
 {
   "name": "file-check-used",
-  "version": "1.0.19",
-  "description": "一个检测项目中未使用资源素材的工具，去除未使用素材，降低项目打包的大小",
+  "version": "1.0.20",
   "main": "./dist/index.js",
   "files": [
     "dist",
@@ -16,7 +15,6 @@
     "start": "node dist/index.js",
     "prepublishOnly": "npm run build"
   },
-  "author": "weipengzou",
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.3.0",
