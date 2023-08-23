@@ -14,5 +14,6 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "NodeNext",
+    "resolveJsonModule": true
   }
 }

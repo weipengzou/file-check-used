@@ -16,4 +16,4 @@ npm install file-check-used -g
 fcu
 ```
 
-全局安装后在项目中使用 `fcu`命令。
+全局安装后在项目根目录中使用 `fcu`命令。
