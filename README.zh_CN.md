@@ -10,9 +10,15 @@
   <a href="./README.zh_CN.md">中文</a>
 </p>
 
-A tool to detect unused asset assets in a project.
-Remove unused assets and reduce the size of the project package.
-Millisecond-level speed, zero intrusion into the project, and a size of only 3KB.
+一个检测项目中未使用资源素材的工具。
+方便去除未使用素材，降低项目打包的大小。
+毫秒级速度，项目零侵入，大小仅3KB。
+
+支持的检测资源
+
+```
+".svg", ".gif", ".png", ".jpg", ".jpeg", ".mp4", ".mov"
+```
 
 <p align='center'>
   <img alt="npm" src="https://img.shields.io/npm/dm/file-check-used">
@@ -20,21 +26,21 @@ Millisecond-level speed, zero intrusion into the project, and a size of only 3KB
   <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/weipengzou/file-check-used">
 </p>
 
-## Install
+## 安装
 
 ```shell
 npm i -g file-check-used
 ```
 
-## Usage
+## 用法
 
-Use the `fcu` command in the project root directory after the global installation.
+全局安装后在项目根目录中使用 `fcu`命令。
 
 ```shell
 $ fcu
 ```
 
-## Cases
+## 案例
 
 ```shell
 $ fcu
