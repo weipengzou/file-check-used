@@ -28,7 +28,7 @@ export const checkTypesUsed = (targetFileUrl: string) => {
       const waitDelArr: any[] = [];
       resArr.forEach((item) => {
         if (resolve(item.filePath) === file) return;// 除了当前文件以外
-        const isUsed = new RegExp(item.type).test(curFileData); // 是否在使用
+        const isUsed = (curFileData.match(new RegExp(item.type, 'g')) ?? [])?.length > 1; // 是否在使用,出现两次及以上
         isUsed && waitDelArr.push(item);
       });
       waitDelArr.forEach((item) => resArr.splice(resArr.indexOf(item), 1));
