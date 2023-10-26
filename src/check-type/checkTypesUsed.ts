@@ -27,7 +27,6 @@ export const checkTypesUsed = (targetFileUrl: string) => {
       const curFileData = readFileSync(file, "utf-8").toString();
       const waitDelArr: any[] = [];
       resArr.forEach((item) => {
-        if (resolve(item.filePath) === file) return;// 除了当前文件以外
         const isUsed = (curFileData.match(new RegExp(item.type, 'g')) ?? [])?.length > 1; // 是否在使用,出现两次及以上
         isUsed && waitDelArr.push(item);
       });
