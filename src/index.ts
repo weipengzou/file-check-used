@@ -1,4 +1,4 @@
-#! /usr/bin / env node
+#!/usr/bin/env node
 import fs from "fs";
 import { checkFile } from './check-file/index.js'
 import { OPERATION_ENUM, getAnswers, } from "./utils/index.js";
