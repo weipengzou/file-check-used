@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, statSync } from "fs";
 import { checkExtName, targetExtName } from "./constants.js";
 
 type GetTargetFileArr = (targetFilePath: string) => {
-  constants: string[]; // 常量名
+  constant: string; // 常量名
   filePath: string; // 文件相对路径
 }[];
 /** 获取目标常量信息 */
@@ -24,12 +24,15 @@ export const getTargetConstantArr: GetTargetFileArr = (targetFilePath) => {
       // 获取当前文件的变量
       const curFileData = readFileSync(filePath, "utf-8").toString();
       // 使用正则表达式匹配以 export const 开头的常量名，返回匹配结果数组
-      const constantsArray = curFileData.match(/(?<=\bexport\s+const\s+)\w+/g) ?? [];
+      const matchArr = curFileData.match(/(?<=\bexport\s+const\s+)\w+/g) ?? [];
       // 文件
-      resultArr.push({
-        filePath,
-        constants: constantsArray,
-      });
+      matchArr.length > 0 &&
+        matchArr.map(constant =>
+          resultArr.push({
+            filePath,
+            constant,
+          })
+        )
     });
   };
   readDir(targetFilePath);

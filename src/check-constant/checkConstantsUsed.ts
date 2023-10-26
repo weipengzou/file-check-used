@@ -17,7 +17,7 @@ export const checkConstantsUsed = (targetFileUrl: string) => {
   const readFile = (filePath: any) => {
     // 遍历文件目录
     readdirSync(filePath).forEach((fileName) => {
-      if (/node_modules|\.git/.test(filePath)) return;
+      if (/node_modules|dist|\.git/.test(filePath)) return;
       const file = join(filePath, fileName);
       // 递归目录
       if (isDirectory(file)) return readFile(file);
@@ -26,11 +26,11 @@ export const checkConstantsUsed = (targetFileUrl: string) => {
       // 获取遍历文件的内容
       const curFileData = readFileSync(file, "utf-8").toString();
       const waitDelArr: any[] = [];
-      reasonConstantsArr.forEach((item) => item.constants.map(constant=>{
-        if(resolve(item.filePath)=== file)return;// 除了当前文件以外
-        const isUsed = new RegExp(constant).test(curFileData); // 是否在使用
+      reasonConstantsArr.forEach((item) => {
+        if (resolve(item.filePath) === file) return;// 除了当前文件以外
+        const isUsed = new RegExp(item.constant).test(curFileData); // 是否在使用
         isUsed && waitDelArr.push(item);
-      }));
+      });
       waitDelArr.forEach((item) => reasonConstantsArr.splice(reasonConstantsArr.indexOf(item), 1));
       ui.updateBottomBar(`剩余数量：${reasonConstantsArr.length}个`);
     });

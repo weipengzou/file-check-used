@@ -2,8 +2,9 @@ import inquirer from "inquirer";
 import { statSync } from "fs";
 
 export enum OPERATION_ENUM {
-  FILE = 'static file',
+  STATIC_FILE = 'static file',
   CONSTANTS = 'constants',
+  TYPES = 'types',
 }
 type GetAnswersResponse = {
   targetFileUrl: string;
@@ -28,7 +29,10 @@ export const getAnswers = async (): Promise<GetAnswersResponse> => {
           value: OPERATION_ENUM.CONSTANTS,
         },
         {
-          value: OPERATION_ENUM.FILE,
+          value: OPERATION_ENUM.STATIC_FILE,
+        },
+        {
+          value: OPERATION_ENUM.TYPES,
         },
       ],
     },

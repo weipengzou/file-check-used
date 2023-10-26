@@ -15,7 +15,7 @@ export const checkFileUsed = (targetFileUrl: string) => {
   const readFile = (filePath: any) => {
     // 遍历文件目录
     readdirSync(filePath).forEach((fileName) => {
-      if (/node_modules|\.git/.test(filePath)) return;
+      if (/node_modules|dist|\.git/.test(filePath)) return;
       const file = join(filePath, fileName);
       // 递归目录
       if (isDirectory(file)) return readFile(file);
