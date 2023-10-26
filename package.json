@@ -1,6 +1,6 @@
 {
   "name": "file-check-used",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "main": "./dist/index.js",
   "author": {
     "name": "weipengzou",
@@ -10,6 +10,7 @@
   "bugs": "https://github.com/weipengzou/file-check-used/issues",
   "keywords": [
     "file",
+    "constants",
     "check",
     "find",
     "fcu"

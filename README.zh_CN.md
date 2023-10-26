@@ -4,10 +4,14 @@
   </p>
 </h1>
 
+
 <p align='center'>
-  <a href="./README.md">English</a>
+  <a href="https://github.com/weipengzou/file-check-used/blob/main/README.md" target="_blank">English</a>
   <span>|</span>
-  <a href="./README.zh_CN.md">中文</a>
+  <a href="https://github.com/weipengzou/file-check-used/blob/main/README.zh_CN.md" target="_blank">中文</a>
+</p>
+
+
 </p>
 
 一个检测项目中未使用资源素材的工具。

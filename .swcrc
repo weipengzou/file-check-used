@@ -5,13 +5,13 @@
             "syntax": "typescript"
         },
         "minify": {
-            "compress": true,
-            "mangle": true
+            // "compress": true,
+            // "mangle": true
         },
         "target": "esnext"
     },
     "module": {
         "type": "es6"
     },
-    "minify": true
+    // "minify": true
 }

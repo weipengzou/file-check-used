@@ -1,35 +1,37 @@
 import inquirer from "inquirer";
 import { statSync } from "fs";
 
+export enum OPERATION_ENUM {
+  FILE = 'static file',
+  CONSTANTS = 'constants',
+}
 type GetAnswersResponse = {
   targetFileUrl: string;
-  operation: string[];
+  operation: OPERATION_ENUM;
 };
-
 export const getAnswers = async (): Promise<GetAnswersResponse> => {
   return await inquirer.prompt([
     {
       type: "input",
       name: "targetFileUrl",
-      message: "输入要排查的文件地址",
-      suffix: "（默认为当前地址）",
+      message: "Enter the file path to be checked",
+      suffix: "Defaults to current path",
       default: ".",
     },
-    // {
-    //   type: "checkbox",
-    //   name: "operation",
-    //   message: "文件操作",
-    //   default: ["Search"],
-    //   choices: [
-    //     {
-    //       value: "Search",
-    //     },
-    //     {
-    //       value: "Delete",
-    //       disabled: true,
-    //     },
-    //   ],
-    // },
+    {
+      type: "list",
+      name: "operation",
+      message: "Select the operation you want to check",
+      default: OPERATION_ENUM.CONSTANTS,
+      choices: [
+        {
+          value: OPERATION_ENUM.CONSTANTS,
+        },
+        {
+          value: OPERATION_ENUM.FILE,
+        },
+      ],
+    },
   ]);
 };
 

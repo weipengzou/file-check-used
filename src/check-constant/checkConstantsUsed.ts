@@ -1,15 +1,17 @@
 import inquirer from "inquirer";
 import { readFileSync, readdirSync } from "fs";
 import { resolve, join, extname } from "path";
-import { isDirectory } from "./getAnswers.js";
-import { getTargetFileArr } from "./searchAssetsFile.js";
-import { targetExtName } from "../constants.js";
+import { isDirectory } from "../utils/getAnswers.js";
+import { targetExtName } from "./constants.js";
+import { getTargetConstantArr } from "./searchConstants.js";
+
+
 
 const __dirname = resolve();
 const ui = new inquirer.ui.BottomBar();
 
-export const checkFileUsed = (targetFileUrl: string) => {
-  const reasonFileArr = getTargetFileArr(targetFileUrl); // 目标文件下所有的文件数据
+export const checkConstantsUsed = (targetFileUrl: string) => {
+  const reasonConstantsArr = getTargetConstantArr(targetFileUrl); // 目标文件下所有的文件数据
   ui.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
@@ -24,15 +26,16 @@ export const checkFileUsed = (targetFileUrl: string) => {
       // 获取遍历文件的内容
       const curFileData = readFileSync(file, "utf-8").toString();
       const waitDelArr: any[] = [];
-      reasonFileArr.forEach((item) => {
-        const isUsed = new RegExp(item.fileName).test(curFileData); // 是否在使用
+      reasonConstantsArr.forEach((item) => item.constants.map(constant=>{
+        if(resolve(item.filePath)=== file)return;// 除了当前文件以外
+        const isUsed = new RegExp(constant).test(curFileData); // 是否在使用
         isUsed && waitDelArr.push(item);
-      });
-      waitDelArr.forEach((item) => reasonFileArr.splice(reasonFileArr.indexOf(item), 1));
-      ui.updateBottomBar(`剩余数量：${reasonFileArr.length}个`);
+      }));
+      waitDelArr.forEach((item) => reasonConstantsArr.splice(reasonConstantsArr.indexOf(item), 1));
+      ui.updateBottomBar(`剩余数量：${reasonConstantsArr.length}个`);
     });
   };
   readFile(__dirname);
   ui.updateBottomBar("");
-  return reasonFileArr;
+  return reasonConstantsArr;
 };
