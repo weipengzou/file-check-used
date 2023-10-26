@@ -3,15 +3,15 @@ import { readFileSync, readdirSync } from "fs";
 import { resolve, join, extname } from "path";
 import { isDirectory } from "../utils/getAnswers.js";
 import { targetExtName } from "./constants.js";
-import { getTargetConstantArr } from "./searchConstants.js";
+import { getTargetTypeArr } from "./searchTypes.js";
 
 
 
 const __dirname = resolve();
 const ui = new inquirer.ui.BottomBar();
 
-export const checkConstantsUsed = (targetFileUrl: string) => {
-  const resArr = getTargetConstantArr(targetFileUrl); // 目标文件下所有的文件数据
+export const checkTypesUsed = (targetFileUrl: string) => {
+  const resArr = getTargetTypeArr(targetFileUrl); // 目标文件下所有的文件数据
   ui.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
@@ -28,7 +28,7 @@ export const checkConstantsUsed = (targetFileUrl: string) => {
       const waitDelArr: any[] = [];
       resArr.forEach((item) => {
         if (resolve(item.filePath) === file) return;// 除了当前文件以外
-        const isUsed = new RegExp(item.constant).test(curFileData); // 是否在使用
+        const isUsed = new RegExp(item.type).test(curFileData); // 是否在使用
         isUsed && waitDelArr.push(item);
       });
       waitDelArr.forEach((item) => resArr.splice(resArr.indexOf(item), 1));
