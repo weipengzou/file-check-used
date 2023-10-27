@@ -7,6 +7,7 @@ const line = "================================";
 
 // 检查文件
 export const checkFile = (targetFileUrl: string) => {
+  console.time("⏱️  ");
   const resArr = checkFileUsed(targetFileUrl);
   let totalSize: number = 0; // 总计大小
   const largeSizeVal = 100; // KB
@@ -25,4 +26,5 @@ export const checkFile = (targetFileUrl: string) => {
   const totalSizeStr = (totalSize / Math.pow(1024, 2)).toFixed(2); // MB
   console.log(greenBright(`🔎 A total of ${resArr.length} unused files were found, totaling ${totalSizeStr} MB. Please confirm whether the listed files are used.`));
   console.log(greenBright(`🔎 共找到 ${resArr.length} 个未使用文件,共计 ${totalSizeStr} MB,请确认列出文件是否使用`));
+  console.timeEnd("⏱️  ");
 }
