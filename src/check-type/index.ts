@@ -32,11 +32,13 @@ export const checkType = async (targetFileUrl: string) => {
     sourceFile.getInterfaces().forEach((interfaceDeclaration) => {
       const interfaceName = interfaceDeclaration.getName();
       // get del interface
+      // 筛选出来的都是已经没有任何调用了，删除这个 interface
       if (interfaceName === type) {
         const fullText = interfaceDeclaration.getFullText();
         const fileData = readFileSync(filePath, "utf-8").toString()
-        // 筛选出来的都是已经没有任何调用了，删除这个 interface
-        const replaceFileData = fileData.replace(new RegExp(fullText + '\n', 'g'), '');
+        // 清理前后空格
+        const trimFullText = fileData.replace(new RegExp(`\\s*${fullText}\\s*`, 'g'), fullText);
+        const replaceFileData = trimFullText.replace(fullText, '');
         writeFileSync(filePath, replaceFileData, "utf-8");
         console.log(`🚀 Del interface`, greenBright(type));
       }
