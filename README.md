@@ -1,3 +1,5 @@
+<!-- TODO
+添加 文件行数 检测 如列出 .ts（可配置） 文件 > 300（可配置） 行 -->
 <h1>
   <p align='center'>
     File-check-used
@@ -60,9 +62,8 @@ $ fcu
 ✅ Done
 ================================
 📁 src/components/layout/seoData.ts ⚙️  seoData
-unused constants:  1
+🔎 Unused constants:  1
 🔎 A total of 1 unused variables were found. Please confirm whether the listed variables are used.
-🔎 共找到 1 个未使用变量,请确认列出变量是否使用
 ⏱️  : 299.249ms
 ```
 
