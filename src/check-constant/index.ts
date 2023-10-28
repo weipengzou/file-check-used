@@ -1,22 +1,23 @@
-import chalk from "chalk";
+import { greenBright, line, blueBright, yellowBright, bold } from "../constants/index.js";
 import { checkConstantsUsed } from "./checkConstantsUsed.js";
 
-const { greenBright, blueBright } = chalk;
-const line = "================================";
-
-// 检查常量
+/** 检查常量 */
 export const checkConstant = (targetFileUrl: string) => {
   console.time("⏱️  ");
   const resArr = checkConstantsUsed(targetFileUrl);
   console.log(greenBright("✅ Done"));
   console.log(line);
-  resArr.forEach(({ filePath, constant },) => {
-    console.log(`📁 ${blueBright(filePath)} ⚙️  ${greenBright(constant)}`)
-  })
-  const unusedCount = resArr.length;// 记数
-  console.log(`unused constants: `, unusedCount);
-  console.log(greenBright(`🔎 A total of ${unusedCount} unused variables were found. Please confirm whether the listed variables are used.`));
-  console.log(greenBright(`🔎 共找到 ${unusedCount} 个未使用变量,请确认列出变量是否使用`));
+  resArr.forEach(({ filePath, constant }) => {
+    console.log(`📁 ${blueBright(filePath)} ⚙️  ${greenBright(constant)}`);
+  });
+  // check no unused
+  const isNoUnused = resArr.length === 0;
+  isNoUnused && console.log(greenBright("🍻 Great,There are no unused in your code"));
+  if (isNoUnused) return;
+  else console.log(line);
+  // response
+  const countStyleText = yellowBright(bold(resArr.length));
+  console.log(`🔎 Unused constant: `, countStyleText);
+  console.log(greenBright(`🔎 A total of ${countStyleText} unused constant were found. Please confirm whether the listed constant are used.`));
   console.timeEnd("⏱️  ");
-  console.log(line);
-}
+};

@@ -2,9 +2,9 @@ import inquirer from "inquirer";
 import { statSync } from "fs";
 
 export enum OPERATION_ENUM {
-  STATIC_FILE = 'static file',
-  CONSTANTS = 'constants',
-  TYPES = 'types',
+  STATIC_FILE = "static file",
+  CONSTANTS = "constants",
+  TYPES = "types",
 }
 type GetAnswersResponse = {
   targetFileUrl: string;

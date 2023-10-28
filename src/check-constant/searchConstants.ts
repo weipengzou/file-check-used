@@ -1,6 +1,7 @@
 import { extname, join } from "path";
 import { readFileSync, readdirSync, statSync } from "fs";
 import { checkExtName, targetExtName } from "./constants.js";
+import { gnoreReg } from "../constants/index.js";
 
 type GetTargetFileArr = (targetFilePath: string) => {
   constant: string; // 常量名
@@ -14,7 +15,7 @@ export const getTargetConstantArr: GetTargetFileArr = (targetFilePath) => {
   // 遍历文件目录
   const readDir = (path: string) => {
     readdirSync(path).forEach((fileName) => {
-      if (/node_modules|dist|\.git/.test(path)) return;
+      if (gnoreReg.test(path)) return;
       let filePath = join(path, fileName).replace(/\\/g, "/"); // 斜杠转换
       const fileInfo = statSync(filePath);
       // 递归目录
@@ -26,13 +27,8 @@ export const getTargetConstantArr: GetTargetFileArr = (targetFilePath) => {
       // 使用正则表达式匹配以 export const 开头的常量名，返回匹配结果数组
       const matchArr = curFileData.match(/(?<=\bexport\s+const\s+)\w+/g) ?? [];
       // 文件
-      matchArr.length > 0 &&
-        matchArr.map(constant =>
-          resultArr.push({
-            filePath,
-            constant,
-          })
-        )
+      if (matchArr.length === 0) return;
+      matchArr.map((constant) => resultArr.push({ filePath, constant }));
     });
   };
   readDir(targetFilePath);

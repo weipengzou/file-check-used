@@ -10,16 +10,19 @@
   <a href="https://github.com/weipengzou/file-check-used/blob/main/docs/README.zh_CN.md" target="_blank">中文</a>
 </p>
 
-A tool for detecting unused code in projects.
+</p>
 
-support
+一个检测项目中未使用的代码工具。
 
-- Resource materials
-- constant
-- TS type declaration (support Automatically remove)
+支持
 
-Remove unused assets and reduce the size of the project package.
-Millisecond-level speed, zero intrusion into the project, and a size of only 3KB.
+- 资源素材
+- 常量
+- TS类型声明（支持自动删除）
+
+方便去除未使用素材，降低项目打包的大小。
+
+毫秒级速度，项目零侵入，大小仅3KB。
 
 <p align='center'>
   <img alt="npm" src="https://img.shields.io/npm/dm/file-check-used">
@@ -27,21 +30,21 @@ Millisecond-level speed, zero intrusion into the project, and a size of only 3KB
   <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/weipengzou/file-check-used">
 </p>
 
-## Install
+## 安装
 
 ```shell
 npm i -g file-check-used
 ```
 
-## Usage
+## 用法
 
-Use the `fcu` command in the project root directory after the global installation.
+全局安装后在项目根目录中使用 `fcu`命令。
 
 ```shell
 $ fcu
 ```
 
-## Cases
+## 案例
 
 ```shell
 $ fcu

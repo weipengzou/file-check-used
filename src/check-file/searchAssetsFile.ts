@@ -1,6 +1,7 @@
 import { extname, join } from "path";
 import { readdirSync, statSync } from "fs";
 import { checkExtName, targetExtName } from "./constants.js";
+import { gnoreReg } from "../constants/index.js";
 
 type GetTargetFileArr = (targetFilePath: string) => {
   fileName: string; // 文件名
@@ -15,7 +16,7 @@ export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
   // 遍历文件目录
   const readDir = (path: string) => {
     readdirSync(path).forEach((fileName) => {
-      if (/node_modules|dist|\.git/.test(path)) return;
+      if (gnoreReg.test(path)) return;
       let filePath = join(path, fileName).replace(/\\/g, "/"); // 斜杠转换
       const fileInfo = statSync(filePath);
       // 递归目录

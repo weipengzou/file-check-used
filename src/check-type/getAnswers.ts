@@ -1,23 +1,17 @@
 import inquirer from "inquirer";
 import { statSync } from "fs";
 
-export enum OPERATION_ENUM {
-  DELETE = '0',
-  SAVE = '1',
-}
 type GetAnswersResponse = {
-  isAutoDelete: boolean
+  isAutoDelete: boolean;
 };
 export const getAnswers = async (): Promise<GetAnswersResponse> => {
   return await inquirer.prompt([
-
     {
-      type: 'confirm',
-      name: 'isAutoDelete',
-      message: 'Automatically remove listed type declarations?',
-      suffix: '(Default true)',
-      default: true
-    }
+      type: "confirm",
+      name: "isAutoDelete",
+      message: "Automatically remove listed type declarations?",
+      default: true,
+    },
   ]);
 };
 
