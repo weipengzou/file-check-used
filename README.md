@@ -1,5 +1,3 @@
-<!-- TODO
-添加 文件行数 检测 如列出 .ts（可配置） 文件 > 300（可配置） 行 -->
 <h1>
   <p align='center'>
     File-check-used

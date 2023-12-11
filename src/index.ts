@@ -4,16 +4,19 @@ import { checkFile } from "./check-file/index.js";
 import { OPERATION_ENUM, getAnswers } from "./utils/index.js";
 import { checkConstant } from "./check-constant/index.js";
 import { checkType } from "./check-type/index.js";
+import { checkLines } from "./check-lines/index.js";
 
 const answers = await getAnswers();
 const bootstrap = () => {
-  if (!fs.existsSync(answers.targetFileUrl)) throw new Error(`${answers.targetFileUrl} not found`);
+  // if (!fs.existsSync(answers.targetFileUrl)) throw new Error(`${answers.targetFileUrl} not found`);
   const isCheckFile = answers.operation === OPERATION_ENUM.STATIC_FILE;
   const isCheckConst = answers.operation === OPERATION_ENUM.CONSTANTS;
   const isCheckType = answers.operation === OPERATION_ENUM.TYPES;
-  isCheckFile && checkFile(answers.targetFileUrl);
-  isCheckConst && checkConstant(answers.targetFileUrl);
-  isCheckType && checkType(answers.targetFileUrl);
+  const isCheckLines = answers.operation === OPERATION_ENUM.LINES;
+  isCheckFile && checkFile(process.cwd());
+  isCheckConst && checkConstant(process.cwd());
+  isCheckType && checkType(process.cwd());
+  isCheckLines && checkLines(process.cwd());
 };
 
 try {

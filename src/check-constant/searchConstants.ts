@@ -1,6 +1,6 @@
 import { extname, join } from "path";
 import { readFileSync, readdirSync, statSync } from "fs";
-import { checkExtName, targetExtName } from "./constants.js";
+import { checkExtName } from "./constants.js";
 import { gnoreReg } from "../constants/index.js";
 
 type GetTargetFileArr = (targetFilePath: string) => {
@@ -9,8 +9,6 @@ type GetTargetFileArr = (targetFilePath: string) => {
 }[];
 /** 获取目标常量信息 */
 export const getTargetConstantArr: GetTargetFileArr = (targetFilePath) => {
-  console.log(`📌 Check: `, checkExtName.join(" "));
-  console.log(`📌 Target: `, targetExtName.join(" "));
   let resultArr: ReturnType<typeof getTargetConstantArr> = [];
   // 遍历文件目录
   const readDir = (path: string) => {

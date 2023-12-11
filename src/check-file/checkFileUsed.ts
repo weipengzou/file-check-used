@@ -12,7 +12,7 @@ export const checkFileUsed = (targetFileUrl: string) => {
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
     // 遍历文件目录
-    readdirSync(filePath).forEach((fileName) => {
+    readdirSync(filePath).forEach((fileName, index, array) => {
       if (gnoreReg.test(filePath)) return;
       const file = join(filePath, fileName);
       // 递归目录
@@ -27,8 +27,8 @@ export const checkFileUsed = (targetFileUrl: string) => {
         isUsed && waitDelArr.push(item);
       });
       waitDelArr.forEach((item) => resArr.splice(resArr.indexOf(item), 1));
-      const progress = ((allLen - resArr.length) / allLen) * 100;
-      bottomBar.updateBottomBar(`🚀 Progress: ${progress}%`);
+      const progress = (index / array.length) * 100;
+      bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
     });
   };
   readFile(__dirname);

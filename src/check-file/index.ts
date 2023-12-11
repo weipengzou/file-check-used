@@ -18,10 +18,10 @@ export const checkFile = (targetFileUrl: string) => {
     const size = sizeKB > 100 ? yellowBright(sizeKB) : sizeKB; // 超过100kb换成黄色提示
     console.log(`📁 ${path} ${size}KB`);
   });
-  // check no unused
-  const isNoUnused = resArr.length === 0;
-  isNoUnused && console.log(greenBright("🍻 Great,There are no unused in your code"));
-  if (isNoUnused) return;
+  // check no problem
+  const isNoProblem = resArr.length === 0;
+  isNoProblem && console.log(greenBright("🍻 Great,There is no problem in your code"));
+  if (isNoProblem) return;
   // response
   const countStyleText = yellowBright(bold(resArr.length));
   const totalSizeStr = yellowBright(bold((totalSize / Math.pow(1024, 2)).toFixed(2))); // MB

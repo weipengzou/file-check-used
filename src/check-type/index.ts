@@ -31,10 +31,10 @@ export const checkType = async (targetFileUrl: string) => {
   console.log(greenBright("✅ Done"));
   console.log(line);
   resArr.forEach(({ filePath, type }) => console.log(`📁 ${blueBright(filePath)} ⚙️  ${greenBright(type)}`));
-  // check no unused
-  const isNoUnused = resArr.length === 0;
-  isNoUnused && console.log(greenBright("🍻 Great,There are no unused in your code"));
-  if (isNoUnused) return;
+  // check no problem
+  const isNoProblem = resArr.length === 0;
+  isNoProblem && console.log(greenBright("🍻 Great,There is no problem in your code"));
+  if (isNoProblem) return;
   // response
   const countStyleText = yellowBright(bold(resArr.length));
   console.log(`🔎 Unused interface: `, countStyleText);

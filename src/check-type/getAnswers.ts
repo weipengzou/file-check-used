@@ -4,8 +4,8 @@ import { statSync } from "fs";
 type GetAnswersResponse = {
   isAutoDelete: boolean;
 };
-export const getAnswers = async (): Promise<GetAnswersResponse> => {
-  return await inquirer.prompt([
+export const getAnswers = async () => {
+  return await inquirer.prompt<GetAnswersResponse>([
     {
       type: "confirm",
       name: "isAutoDelete",

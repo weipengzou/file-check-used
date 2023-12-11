@@ -5,20 +5,21 @@ export enum OPERATION_ENUM {
   STATIC_FILE = "static file",
   CONSTANTS = "constants",
   TYPES = "types",
+  LINES = "lines",
 }
 type GetAnswersResponse = {
   targetFileUrl: string;
   operation: OPERATION_ENUM;
 };
-export const getAnswers = async (): Promise<GetAnswersResponse> => {
-  return await inquirer.prompt([
-    {
-      type: "input",
-      name: "targetFileUrl",
-      message: "Enter the file path to be checked",
-      suffix: "Defaults to current path",
-      default: ".",
-    },
+export const getAnswers = async () => {
+  return await inquirer.prompt<GetAnswersResponse>([
+    // {
+    //   type: "input",
+    //   name: "targetFileUrl",
+    //   message: "Enter the file path to be checked",
+    //   suffix: "Defaults to current path",
+    //   default: ".",
+    // },
     {
       type: "list",
       name: "operation",
@@ -33,6 +34,9 @@ export const getAnswers = async (): Promise<GetAnswersResponse> => {
         },
         {
           value: OPERATION_ENUM.TYPES,
+        },
+        {
+          value: OPERATION_ENUM.LINES,
         },
       ],
     },
