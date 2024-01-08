@@ -1,36 +1,26 @@
-import { extname, join } from "path";
-import { readdirSync, statSync } from "fs";
-import { checkExtName } from "./constants.js";
-import { gnoreReg } from "../constants/index.js";
+import { statSync } from "fs";
+import {  imgExtName, videoExtName } from "../constants/index.js";
+import { getIgnore } from "../utils/getIgnore.js";
+import fg from "fast-glob";
 
-type GetTargetFileArr = (targetFilePath: string) => {
+type GetTargetFileArr = (targetFilePath?: string) => {
   fileName: string; // 文件名
   filePath: string; // 文件相对路径
   fileSize: number; // 文件大小
 }[];
 /** 获取目标文件信息 */
-export const getTargetFileArr: GetTargetFileArr = (targetFilePath) => {
-  let resultArr: ReturnType<typeof getTargetFileArr> = [];
-  // 遍历文件目录
-  const readDir = (path: string) => {
-    readdirSync(path).forEach((fileName) => {
-      if (gnoreReg.test(path)) return;
-      let filePath = join(path, fileName).replace(/\\/g, "/"); // 斜杠转换
-      const fileInfo = statSync(filePath);
-      // 递归目录
-      if (fileInfo.isDirectory()) return readDir(filePath);
-      // 检测拓展名
-      if (!checkExtName.includes(extname(fileName))) return;
-
-      // 文件
-      resultArr.push({
-        filePath,
-        fileName,
-        fileSize: fileInfo.size,
-      });
-    });
-  };
-  readDir(targetFilePath);
-  console.log("📁 File Count: ", resultArr.length);
-  return resultArr;
+export const getTargetFileArr: GetTargetFileArr = () => {
+  const path = `**/*.(${imgExtName.join('|')})`;
+  console.log(`path: `, path);
+  const files = fg.sync(path, { dot: true, onlyFiles: true });
+  const ig = getIgnore();
+  const responseFiles = ig.filter(files).map((item) => {
+    const fileInfo = statSync(item);
+    return {
+      filePath: item,
+      fileName: item,
+      fileSize: fileInfo.size,
+    };
+  });
+  return responseFiles;
 };

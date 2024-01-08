@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { getFilePaths } from "../utils/getFilePaths.js";
-import { __dirname, bottomBar, codeExtName } from "../constants/index.js";
+import { __dirname, bottomBar } from "../constants/index.js";
 import { defaultTargetLines } from "./constants.js";
 import path from "path";
 
