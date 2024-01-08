@@ -1,5 +1,5 @@
 import { statSync } from "fs";
-import {  imgExtName, videoExtName } from "../constants/index.js";
+import { imgExtName, videoExtName } from "../constants/index.js";
 import { getIgnore } from "../utils/getIgnore.js";
 import fg from "fast-glob";
 
@@ -10,9 +10,9 @@ type GetTargetFileArr = (targetFilePath?: string) => {
 }[];
 /** 获取目标文件信息 */
 export const getTargetFileArr: GetTargetFileArr = () => {
-  const path = `**/*.(${imgExtName.join('|')})`;
+  const path = `**/*.(${imgExtName.join("|")})`;
   console.log(`path: `, path);
-  const files = fg.sync(path, { dot: true, onlyFiles: true });
+  const files = fg.sync(path, { dot: true, onlyFiles: true, ignore: ["node_modules", ".git"] });
   const ig = getIgnore();
   const responseFiles = ig.filter(files).map((item) => {
     const fileInfo = statSync(item);
@@ -22,5 +22,6 @@ export const getTargetFileArr: GetTargetFileArr = () => {
       fileSize: fileInfo.size,
     };
   });
+
   return responseFiles;
 };

@@ -8,7 +8,7 @@ type GetTargetFileArr = (targetFilePath: string) => {
 /** 获取目标常量信息 */
 export const getTargetConstantArr: GetTargetFileArr = (targetFilePath) => {
   let resultArr: ReturnType<typeof getTargetConstantArr> = [];
-  const files = getFilePaths({ source: "**/*.(ts|js)" });
+  const files = getFilePaths({ source: "**/*.(ts|tsx|js|jsx)" });
   files.forEach((path) => {
     // 获取当前文件的变量
     const curFileData = readFileSync(path, "utf-8").toString();

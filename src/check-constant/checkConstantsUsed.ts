@@ -7,8 +7,6 @@ import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 
 export const checkConstantsUsed = (targetFileUrl: string) => {
   const resArr = getTargetConstantArr(targetFileUrl); // 目标文件下所有的文件数据
-  const allLen = resArr.length; // 总数
-
   bottomBar.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
@@ -25,7 +23,7 @@ export const checkConstantsUsed = (targetFileUrl: string) => {
       const waitDelArr: any[] = [];
       resArr.forEach((item) => {
         const isSelf = resolve(item.filePath) === file; //当前文件
-        const match = curFileData.match(new RegExp(item.constant, "g")) ?? [];
+        const match = curFileData.match(new RegExp(`\\b${item.constant}\\b`, "g")) ?? [];
         const isUsed = match?.length >= (isSelf ? 2 : 1); // 是否在使用, 当前出现两次，其他文件一次
         isUsed && waitDelArr.push(item);
       });

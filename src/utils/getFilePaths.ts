@@ -17,7 +17,7 @@ export const getFilePaths = ({source = "**/*.*"}: Params): string[] => {
   const reason = fg.sync(source, {
     dot: true,
     onlyFiles: true,
-    ignore: ['node_modules','.git']
+    ignore: ['node_modules', '.git']
   });
   return ig.filter(reason);
 };

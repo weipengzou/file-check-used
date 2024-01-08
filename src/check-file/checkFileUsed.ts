@@ -7,7 +7,6 @@ import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 
 export const checkFileUsed = (targetFileUrl: string) => {
   const resArr = getTargetFileArr(targetFileUrl); // 目标文件下所有的文件数据
-  const allLen = resArr.length; // 总数
   bottomBar.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
