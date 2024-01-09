@@ -1,14 +1,14 @@
 import { readFileSync } from "fs";
 import { getFilePaths } from "../utils/getFilePaths.js";
 
-type GetTargetFileArr = (targetFilePath: string) => {
+type GetTargetFileArr = () => {
   constant: string; // 常量名
   filePath: string; // 文件相对路径
 }[];
 /** 获取目标常量信息 */
-export const getTargetConstantArr: GetTargetFileArr = (targetFilePath) => {
+export const getTargetConstantArr: GetTargetFileArr = () => {
   let resultArr: ReturnType<typeof getTargetConstantArr> = [];
-  const files = getFilePaths({ source: "**/*.(ts|tsx|js|jsx)" });
+  const files = getFilePaths({ source: "**/*\.(ts|tsx|js|jsx)" });
   files.forEach((path) => {
     // 获取当前文件的变量
     const curFileData = readFileSync(path, "utf-8").toString();

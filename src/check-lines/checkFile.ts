@@ -5,7 +5,6 @@ import { defaultTargetLines } from "./constants.js";
 import path from "path";
 
 type CheckFileLineFn = (
-  targetFilePath: string,
   targetLines: number,
   targetExtName: string
 ) => {
@@ -13,9 +12,9 @@ type CheckFileLineFn = (
   filePath: string; // 文件相对路径
   fileLines: number; // 文件相对路径
 }[];
-export const checkFileLine: CheckFileLineFn = (targetUrl, targetLines = defaultTargetLines, targetExtName) => {
-  const source = `**/*.${targetExtName}`;
-  const paths = getFilePaths({ targetUrl, source }); // 目标文件下所有的文件数据
+export const checkFileLine: CheckFileLineFn = (targetLines = defaultTargetLines, targetExtName) => {
+  const source = `**/*\.${targetExtName}`;
+  const paths = getFilePaths({ source }); // 目标文件下所有的文件数据
   const reasonList: ReturnType<CheckFileLineFn> = [];
   bottomBar.log.write(`find ${paths.length} files`);
   bottomBar.log.write("🚅 Start");

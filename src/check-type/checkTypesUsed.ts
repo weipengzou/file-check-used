@@ -5,7 +5,7 @@ import { targetExtName } from "./constants.js";
 import { getTargetTypeArr } from "./searchTypes.js";
 import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 
-export const checkTypesUsed = (targetFileUrl: string) => {
+export const checkTypesUsed = () => {
   const resArr = getTargetTypeArr(); // 目标文件下所有的文件数据
 
   bottomBar.log.write("🚅 Start");

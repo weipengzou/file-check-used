@@ -13,10 +13,10 @@ const bootstrap = () => {
   const isCheckConst = answers.operation === OPERATION_ENUM.CONSTANTS;
   const isCheckType = answers.operation === OPERATION_ENUM.TYPES;
   const isCheckLines = answers.operation === OPERATION_ENUM.LINES;
-  isCheckFile && checkFile(process.cwd());
-  isCheckConst && checkConstant(process.cwd());
-  isCheckType && checkType(process.cwd());
-  isCheckLines && checkLines(process.cwd());
+  isCheckFile && checkFile();
+  isCheckConst && checkConstant();
+  isCheckType && checkType();
+  isCheckLines && checkLines();
 };
 
 try {

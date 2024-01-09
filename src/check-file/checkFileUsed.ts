@@ -5,8 +5,8 @@ import { getTargetFileArr } from "./searchAssetsFile.js";
 import { targetExtName } from "./constants.js";
 import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 
-export const checkFileUsed = (targetFileUrl: string) => {
-  const resArr = getTargetFileArr(targetFileUrl); // 目标文件下所有的文件数据
+export const checkFileUsed = () => {
+  const resArr = getTargetFileArr(); // 目标文件下所有的文件数据
   bottomBar.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {

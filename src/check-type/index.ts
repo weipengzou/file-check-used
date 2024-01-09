@@ -25,9 +25,9 @@ const autoDelInterface = (arr: { type: string; filePath: string }[]) => {
 };
 
 /** 检查类型接口 */
-export const checkType = async (targetFileUrl: string) => {
+export const checkType = async () => {
   console.time("⏱️  ");
-  const resArr = checkTypesUsed(targetFileUrl);
+  const resArr = checkTypesUsed();
   console.log(greenBright("✅ Done"));
   console.log(line);
   resArr.forEach(({ filePath, type }) => console.log(`📁 ${blueBright(filePath)} ⚙️  ${greenBright(type)}`));

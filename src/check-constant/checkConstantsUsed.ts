@@ -5,8 +5,8 @@ import { targetExtName } from "./constants.js";
 import { getTargetConstantArr } from "./searchConstants.js";
 import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 
-export const checkConstantsUsed = (targetFileUrl: string) => {
-  const resArr = getTargetConstantArr(targetFileUrl); // 目标文件下所有的文件数据
+export const checkConstantsUsed = () => {
+  const resArr = getTargetConstantArr(); // 目标文件下所有的文件数据
   bottomBar.log.write("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {

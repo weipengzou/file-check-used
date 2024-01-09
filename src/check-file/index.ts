@@ -4,9 +4,9 @@ import { checkFileUsed } from "./checkFileUsed.js";
 import { bold, greenBright, line, yellowBright } from "../constants/index.js";
 
 /** 检查文件 */
-export const checkFile = (targetFileUrl: string) => {
+export const checkFile = () => {
   console.time("⏱️  ");
-  const resArr = checkFileUsed(targetFileUrl);
+  const resArr = checkFileUsed();
   let totalSize: number = 0; // 总计大小
   console.log(greenBright("✅ Done"));
   console.log(line);

@@ -3,11 +3,11 @@ import { checkFileLine } from "./checkFile.js";
 import { getAnswers } from "./getAnswers.js";
 
 /** 检查 lines */
-export const checkLines = async (targetFileUrl: string) => {
+export const checkLines = async () => {
   const { targetLines, targetExtName } = await getAnswers();
 
   console.time("⏱️  ");
-  const resArr = checkFileLine(targetFileUrl, targetLines, targetExtName);
+  const resArr = checkFileLine(targetLines, targetExtName);
   console.log(greenBright("✅ Done"));
   console.log(line);
   resArr.forEach(({ fileLines, filePath }) => {

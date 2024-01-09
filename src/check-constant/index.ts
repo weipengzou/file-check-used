@@ -2,9 +2,9 @@ import { greenBright, line, blueBright, yellowBright, bold } from "../constants/
 import { checkConstantsUsed } from "./checkConstantsUsed.js";
 
 /** 检查常量 */
-export const checkConstant = (targetFileUrl: string) => {
+export const checkConstant = () => {
   console.time("⏱️  ");
-  const resArr = checkConstantsUsed(targetFileUrl);
+  const resArr = checkConstantsUsed();
   console.log(greenBright("✅ Done"));
   console.log(line);
   resArr.forEach(({ filePath, constant }) => {
