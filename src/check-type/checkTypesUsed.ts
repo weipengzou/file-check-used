@@ -1,39 +1,27 @@
-import { readFileSync, readdirSync } from "fs";
-import { resolve, join, extname } from "path";
-import { isDirectory } from "../utils/getAnswers.js";
-import { targetExtName } from "./constants.js";
+import { readFileSync } from "fs";
+import { resolve } from "path";
 import { getTargetTypeArr } from "./searchTypes.js";
-import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
+import { __dirname, bottomBar } from "../constants/index.js";
+import { getFilePaths } from "../utils/getFilePaths.js";
 
 export const checkTypesUsed = () => {
-  const resArr = getTargetTypeArr(); // 目标文件下所有的文件数据
-
+  const resArr = getTargetTypeArr();
+  const allArr = getFilePaths();// 目标文件下所有的文件数据
   bottomBar.log.write("🚅 Start");
-  // 遍历全部文件夹
-  const readFile = (filePath: any) => {
-    // 遍历文件目录
-    readdirSync(filePath).forEach((fileName, index, array) => {
-      if (gnoreReg.test(filePath)) return;
-      const file = join(filePath, fileName);
-      // 递归目录
-      if (isDirectory(file)) return readFile(file);
-      // 检测拓展名
-      if (!targetExtName.includes(extname(fileName))) return;
-      // 获取遍历文件的内容
-      const waitDelArr: typeof resArr = [];
-      resArr.forEach((item) => {
-        const curFileData = readFileSync(file, "utf-8").toString();
-        const isSelf = resolve(item.filePath) === file; //当前文件
-        const match = curFileData.match(new RegExp(`\\b${item.type}\\b`, "g")) ?? [];
-        const isUsed = match?.length >= (isSelf ? 2 : 1); // 是否在使用, 当前出现两次，其他文件一次
-        isUsed && waitDelArr.push(item);
-      });
-      waitDelArr.forEach((item) => resArr.splice(resArr.indexOf(item), 1));
-      const progress = (index / array.length) * 100;
-      bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
+  allArr.forEach((filePath, index) => {
+    // 获取遍历文件的内容
+    const waitDelArr: typeof resArr = [];
+    resArr.forEach((item) => {
+      const curFileData = readFileSync(filePath, "utf-8").toString();
+      const isSelf = resolve(item.filePath) === resolve(filePath); //当前文件
+      const match = curFileData.match(new RegExp(`\\b${item.type}\\b`, "g")) ?? [];
+      const isUsed = match?.length >= (isSelf ? 2 : 1); // 是否在使用, 当前出现两次，其他文件一次
+      isUsed && waitDelArr.push(item);
     });
-  };
-  readFile(__dirname);
+    waitDelArr.forEach((item) => resArr.splice(resArr.indexOf(item), 1));
+    const progress = (index / allArr.length) * 100;
+    bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
+  });
   bottomBar.updateBottomBar("");
   return resArr;
 };

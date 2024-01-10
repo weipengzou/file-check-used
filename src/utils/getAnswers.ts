@@ -30,10 +30,10 @@ export const getAnswers = async () => {
           value: OPERATION_ENUM.CONSTANTS,
         },
         {
-          value: OPERATION_ENUM.STATIC_FILE,
+          value: OPERATION_ENUM.TYPES,
         },
         {
-          value: OPERATION_ENUM.TYPES,
+          value: OPERATION_ENUM.STATIC_FILE,
         },
         {
           value: OPERATION_ENUM.LINES,

@@ -13,7 +13,7 @@ type Params = {
   extIgnore?: string[];
 };
 const ig = getIgnore();
-export const getFilePaths = ({source = "**/*"}: Params): string[] => {
+export const getFilePaths = ({source = "**/*"}: Params={}): string[] => {
   const reason = fg.sync(source, {
     dot: true,
     onlyFiles: true,
