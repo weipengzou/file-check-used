@@ -1,13 +1,15 @@
 import { readFileSync, readdirSync } from "fs";
-import { resolve, join, extname } from "path";
+import { join, extname } from "path";
 import { isDirectory } from "../utils/getAnswers.js";
 import { getTargetFileArr } from "./searchAssetsFile.js";
 import { targetExtName } from "./constants.js";
 import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 
 export const checkFileUsed = () => {
-  const resArr = getTargetFileArr(); // 目标文件下所有的文件数据
-  bottomBar.log.write("🚅 Start");
+  type ValueType = ReturnType<typeof getTargetFileArr>[0];
+  const resSet = new Set<ValueType>(getTargetFileArr()); // 目标文件下所有的文件数据
+
+  bottomBar.updateBottomBar("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
     // 遍历文件目录
@@ -20,17 +22,19 @@ export const checkFileUsed = () => {
       if (!targetExtName.includes(extname(fileName))) return;
       // 获取遍历文件的内容
       const curFileData = readFileSync(file, "utf-8").toString();
-      const waitDelArr: any[] = [];
-      resArr.forEach((item) => {
-        const isUsed = new RegExp(item.fileName).test(curFileData); // 是否在使用
-        isUsed && waitDelArr.push(item);
+      const waitDelSet = new Set<ValueType>();
+      resSet.forEach((item) => {
+        const isUsed = curFileData.includes(item.fileName); // 是否在使用
+        isUsed && waitDelSet.add(item);
       });
-      waitDelArr.forEach((item) => resArr.splice(resArr.indexOf(item), 1));
+      waitDelSet.forEach((item) => resSet.delete(item));
       const progress = (index / array.length) * 100;
-      bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
+      if (progress % 10 === 0) { // 只有当进度达到10%的整数倍时才更新进度条
+        bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
+      }
     });
   };
   readFile(__dirname);
   bottomBar.updateBottomBar("");
-  return resArr;
+  return Array.from(resSet);
 };

@@ -13,13 +13,6 @@ type GetAnswersResponse = {
 };
 export const getAnswers = async () => {
   return await inquirer.prompt<GetAnswersResponse>([
-    // {
-    //   type: "input",
-    //   name: "targetFileUrl",
-    //   message: "Enter the file path to be checked",
-    //   suffix: "Defaults to current path",
-    //   default: ".",
-    // },
     {
       type: "list",
       name: "operation",

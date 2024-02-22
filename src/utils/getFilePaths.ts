@@ -12,13 +12,13 @@ type Params = {
   source?: string | string[];
   extIgnore?: string[];
 };
-const ig = getIgnore();
-export const getFilePaths = ({source = "**/*"}: Params={}): string[] => {
+export const getFilePaths = ({ source = "**/*" }: Params = {}): string[] => {
+  const ig = getIgnore();
   const reason = fg.sync(source, {
     dot: true,
     onlyFiles: true,
     ignore: ['node_modules', '.git']
   });
-  const filterRes =  ig.filter(reason);
+  const filterRes = ig.filter(reason);
   return filterRes;
 };

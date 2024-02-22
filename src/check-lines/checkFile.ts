@@ -17,7 +17,7 @@ export const checkFileLine: CheckFileLineFn = (targetLines = defaultTargetLines,
   const paths = getFilePaths({ source }); // 目标文件下所有的文件数据
   const reasonList: ReturnType<CheckFileLineFn> = [];
   bottomBar.log.write(`find ${paths.length} files`);
-  bottomBar.log.write("🚅 Start");
+  bottomBar.updateBottomBar("🚅 Start");
   // 遍历全部文件夹
   paths.forEach((filePath, index, array) => {
     if (!filePath) return;
@@ -35,7 +35,9 @@ export const checkFileLine: CheckFileLineFn = (targetLines = defaultTargetLines,
     }
 
     const progress = (index / array.length) * 100;
-    bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
+    if (progress % 10 === 0) { // 只有当进度达到10%的整数倍时才更新进度条
+      bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
+    }
   });
   bottomBar.updateBottomBar("");
   return reasonList;
