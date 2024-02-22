@@ -33,11 +33,8 @@ export const checkFileLine: CheckFileLineFn = (targetLines = defaultTargetLines,
     if (curLines > targetLines) {
       reasonList.push({ filePath, fileName, fileLines: curLines });
     }
-
     const progress = (index / array.length) * 100;
-    if (progress % 10 === 0) { // 只有当进度达到10%的整数倍时才更新进度条
-      bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
-    }
+    bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
   });
   bottomBar.updateBottomBar("");
   return reasonList;

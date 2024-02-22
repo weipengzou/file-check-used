@@ -8,7 +8,6 @@ import { __dirname, bottomBar, gnoreReg } from "../constants/index.js";
 export const checkFileUsed = () => {
   type ValueType = ReturnType<typeof getTargetFileArr>[0];
   const resSet = new Set<ValueType>(getTargetFileArr()); // 目标文件下所有的文件数据
-
   bottomBar.updateBottomBar("🚅 Start");
   // 遍历全部文件夹
   const readFile = (filePath: any) => {
@@ -29,9 +28,7 @@ export const checkFileUsed = () => {
       });
       waitDelSet.forEach((item) => resSet.delete(item));
       const progress = (index / array.length) * 100;
-      if (progress % 10 === 0) { // 只有当进度达到10%的整数倍时才更新进度条
-        bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
-      }
+      bottomBar.updateBottomBar(`🚀 Progress: ${progress.toFixed(2)}%`);
     });
   };
   readFile(__dirname);
