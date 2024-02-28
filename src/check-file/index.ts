@@ -1,5 +1,4 @@
 import chalk from "chalk";
-
 import { checkFileUsed } from "./checkFileUsed.js";
 import { bold, greenBright, line, yellowBright } from "../constants/index.js";
 

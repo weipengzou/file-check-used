@@ -23,7 +23,7 @@ export const checkFileUsed = () => {
       const curFileData = readFileSync(file, "utf-8").toString();
       const waitDelSet = new Set<ValueType>();
       resSet.forEach((item) => {
-        const isUsed = curFileData.includes(item.fileName); // 是否在使用
+        const isUsed = curFileData.includes(fileName); // 是否在使用
         isUsed && waitDelSet.add(item);
       });
       waitDelSet.forEach((item) => resSet.delete(item));
