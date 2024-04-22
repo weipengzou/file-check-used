@@ -1,7 +1,8 @@
 import { statSync } from "fs";
-import { imgExtName, videoExtName } from "../constants/index.js";
+import { imgExtName, } from "../constants/index.js";
 import { getIgnore } from "../utils/getIgnore.js";
 import fg from "fast-glob";
+import { basename, extname } from 'path'
 
 type GetTargetFileArr = () => {
   fileName: string; // 文件名
@@ -16,9 +17,10 @@ export const getTargetFileArr: GetTargetFileArr = () => {
   const ig = getIgnore();
   const responseFiles = ig.filter(files).map((item) => {
     const fileInfo = statSync(item);
+    const fileName = basename(item, extname(item));
     return {
       filePath: item,
-      fileName: item,
+      fileName: fileName,
       fileSize: fileInfo.size,
     };
   });
