@@ -29,7 +29,7 @@ Millisecond-level speed, zero intrusion into the project, and a size of only 3KB
 
 ## Demo
 
-![demo](./fcu_demo.gif)
+![demo](https://pub-b8f4a0643ac644209eb7f1f7c70161d8.r2.dev/fcu_demo.gif)
 
 ## Install
 

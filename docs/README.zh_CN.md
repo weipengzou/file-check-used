@@ -32,7 +32,7 @@
 
 ## 预览
 
-![demo](../fcu_demo.gif)
+![demo](https://pub-b8f4a0643ac644209eb7f1f7c70161d8.r2.dev/fcu_demo.gif)
 
 ## 安装
 
