@@ -1,6 +1,6 @@
 {
   "name": "file-check-used",
-  "version": "1.4.18",
+  "version": "1.4.19",
   "main": "./dist/index.js",
   "types": "module",
   "author": {
