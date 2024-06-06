@@ -6,14 +6,14 @@ import path from "path";
 
 type CheckFileLineFn = (
   targetLines: number,
-  targetExtName: string
+  targetExtName: string[],
 ) => {
   fileName: string; // 文件名
   filePath: string; // 文件相对路径
   fileLines: number; // 文件相对路径
 }[];
-export const checkFileLine: CheckFileLineFn = (targetLines = defaultTargetLines, targetExtName) => {
-  const source = `**/*\.${targetExtName}`;
+export const checkFileLine: CheckFileLineFn = (targetLines = defaultTargetLines, targetExtName = []) => {
+  const source = `**/*\.${targetExtName.map((value) => value).join("|")}`;
   const paths = getFilePaths({ source }); // 目标文件下所有的文件数据
   const reasonList: ReturnType<CheckFileLineFn> = [];
   bottomBar.log.write(`find ${paths.length} files`);

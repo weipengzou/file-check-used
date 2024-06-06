@@ -1,11 +1,12 @@
 import inquirer from "inquirer";
-import { defaultTargetLines } from "./constants.js";
+import { defaultTargetLines, TS_EXTNAME, extnameList } from "./constants.js";
 
 type GetAnswersResponse = {
   targetLines: number;
-  targetExtName: string;
+  targetExtName: string[];
 };
 export const getAnswers = async () => {
+
   return await inquirer.prompt<GetAnswersResponse>([
     {
       type: "number",
@@ -14,10 +15,12 @@ export const getAnswers = async () => {
       default: defaultTargetLines,
     },
     {
-      type: "input",
+      type: "checkbox",
       name: "targetExtName",
-      message: "input check extname? (🔴 .ts 🟢 ts)",
-      validate: (input) => /^[a-zA-Z]*$/.test(input), // 只接受英文字符的输入
+      message: "What is your target file extension?",
+      // 默认全选
+      default: TS_EXTNAME,
+      choices: extnameList.map((value) => ({ name: value, value })),
     },
   ]);
 };
