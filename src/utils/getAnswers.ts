@@ -14,23 +14,19 @@ type GetAnswersResponse = {
 export const getAnswers = async () => {
   return await inquirer.prompt<GetAnswersResponse>([
     {
-      type: "list",
+      type: "checkbox",
       name: "operation",
       message: "Select the operation you want to check",
-      default: OPERATION_ENUM.CONSTANTS,
+      default: [
+        OPERATION_ENUM.CONSTANTS,
+        OPERATION_ENUM.TYPES,
+        OPERATION_ENUM.STATIC_FILE,
+      ],
       choices: [
-        {
-          value: OPERATION_ENUM.CONSTANTS,
-        },
-        {
-          value: OPERATION_ENUM.TYPES,
-        },
-        {
-          value: OPERATION_ENUM.STATIC_FILE,
-        },
-        {
-          value: OPERATION_ENUM.LINES,
-        },
+        OPERATION_ENUM.CONSTANTS,
+        OPERATION_ENUM.TYPES,
+        OPERATION_ENUM.STATIC_FILE,
+        OPERATION_ENUM.LINES,
       ],
     },
   ]);

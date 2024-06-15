@@ -4,11 +4,10 @@ import { bold, greenBright, line, yellowBright } from "../constants/index.js";
 
 /** 检查文件 */
 export const checkFile = () => {
-  console.time("⏱️  ");
   const resArr = checkFileUsed();
   let totalSize: number = 0; // 总计大小
   console.log(greenBright("✅ Done"));
-  console.log(line);
+  console.log(`${line} Files ${line}`);
   resArr.forEach((item) => {
     const { filePath, fileName, fileSize } = item;
     const path = chalk.bold(filePath.replace(fileName, greenBright(fileName)));
@@ -26,5 +25,4 @@ export const checkFile = () => {
   const totalSizeStr = yellowBright(bold((totalSize / Math.pow(1024, 2)).toFixed(2))); // MB
   console.log(`🔎 Unused constant: `, countStyleText);
   console.log(greenBright(`🔎 A total of ${countStyleText} unused files were found, totaling ${totalSizeStr} MB. Please confirm whether the listed files are used.`));
-  console.timeEnd("⏱️  ");
 };

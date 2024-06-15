@@ -1,11 +1,25 @@
 {
   "name": "file-check-used",
-  "version": "1.4.21",
+  "version": "1.4.22",
   "main": "./dist/index.js",
   "types": "module",
   "author": {
     "name": "weipengzou",
     "email": "weipengzou19867636668@gmail.com"
+  },
+  "description": "A tool for detecting unused code in projects.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weipengzou/file-check-used.git"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "directories": {
+    "lib": "src"
   },
   "homepage": "https://github.com/weipengzou/file-check-used",
   "bugs": "https://github.com/weipengzou/file-check-used/issues",

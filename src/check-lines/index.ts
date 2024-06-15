@@ -6,7 +6,6 @@ import { getAnswers } from "./getAnswers.js";
 export const checkLines = async () => {
   const { targetLines, targetExtName } = await getAnswers();
 
-  console.time("⏱️  ");
   const resArr = checkFileLine(targetLines, targetExtName);
   console.log(greenBright("✅ Done"));
   console.log(line);
@@ -17,9 +16,8 @@ export const checkLines = async () => {
   const isNoProblem = resArr.length === 0;
   isNoProblem && console.log(greenBright("🍻 Great,There is no problem in your code"));
   if (isNoProblem) return;
-  else console.log(line);
+
   // response
   const countStyleText = yellowBright(bold(resArr.length));
   console.log(`🔎 Total file: `, countStyleText);
-  console.timeEnd("⏱️  ");
 };

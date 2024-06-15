@@ -26,10 +26,9 @@ const autoDelInterface = (arr: { type: string; filePath: string }[]) => {
 
 /** 检查类型接口 */
 export const checkType = async () => {
-  console.time("⏱️  ");
   const resArr = checkTypesUsed();
   console.log(greenBright("✅ Done"));
-  console.log(line);
+  console.log(`${line} Types ${line}`);
   resArr.forEach(({ filePath, type }) => console.log(`📁 ${blueBright(filePath)} ⚙️  ${greenBright(type)}`));
   // check no problem
   const isNoProblem = resArr.length === 0;
@@ -39,7 +38,6 @@ export const checkType = async () => {
   const countStyleText = yellowBright(bold(resArr.length));
   console.log(`🔎 Unused interface: `, countStyleText);
   console.log(greenBright(`🔎 A total of ${countStyleText} unused interface were found. Please confirm whether the listed interface are used.`));
-  console.timeEnd("⏱️  ");
   console.log(line);
   console.log(`You can press ${greenBright("Enter")} to ${greenBright("automatically remove")} the listed interfaces`);
   const { isAutoDelete } = await getAnswers();
